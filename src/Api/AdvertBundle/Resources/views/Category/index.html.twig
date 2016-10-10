@@ -1,0 +1,32 @@
+{% extends 'ApiAdvertBundle:Default:index.html.twig' %}
+
+{% block container %}
+    <h1>Liste des Categories</h1>
+    <hr>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <a class="btn btn-default" href="{{ path('category_show', { 'id': category.id }) }}">Voir</a>
+                    <a class="btn btn-info" href="{{ path('category_edit', { 'id': category.id }) }}">Editer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <div class="pull-right">
+        <a class="btn btn-default" href="{{ path('api_advert_homepage') }}" type="button">Retour Accueil</a>
+        <a class="btn btn-success" href="{{ path('category_new') }}" type="button">Ajouter une categorie</a>
+    </div>
+{% endblock %}

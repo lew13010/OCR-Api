@@ -1,0 +1,18 @@
+{% extends 'ApiAdvertBundle:Default:index.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+
+
+{% block container %}
+    <h1>Editer une ville</h1>
+
+    <hr>
+    {{ form_start(edit_form) }}
+
+    {{ form_errors(edit_form.name) }}
+    {{ form_label(edit_form.name, 'Nom de la Ville') }}
+    {{ form_widget(edit_form.name, {'attr': {'class': 'form-control'}}) }}
+    <hr>
+    {{ form_widget(edit_form.Valider, {'attr': {'class': 'btn btn-success pull-right'}} ) }}
+    <a class="btn btn-default pull-right" href="{{ path('city_index') }}" type="button">Retour à la liste</a>
+    {{ form_end(edit_form) }}
+{% endblock %}

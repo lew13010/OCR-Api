@@ -1,0 +1,43 @@
+{% extends 'ApiAdvertBundle:Default:index.html.twig' %}
+
+{% block container %}
+    <h1>Article</h1>
+    <hr>
+    <table class="table table-hover table-bordered">
+        <tbody>
+            <tr>
+                <th class="col-sm-2">Title</th>
+                <td>{{ advert.title }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{% if null == advert.price %}NC{% else %}{{ advert.price }} €{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ advert.categories.name }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ advert.city.name }}</td>
+            </tr>
+            <tr>
+                <th>Annonce</th>
+                <td>
+                    <p>{{ advert.description }}</p>
+                    {% for image in advert.images %}
+                        <p class="col-sm-4"><img src="../../../../../../uploads/{{ image.image }}" alt="" class="img-responsive img-rounded pull-left"></p>
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div class="pull-right">
+        {{ form_start(delete_form) }}
+        <a class="btn btn-default" href="{{ path('advert_index') }}" role="button">Retour à la liste</a>
+        <a class="btn btn-info" href="{{ path('advert_edit', { 'id': advert.id }) }}" role="button">Editer</a>
+        {{ form_widget(delete_form.Supprimer, {'attr': {'class': 'btn btn-danger'}} ) }}
+        {{ form_end(delete_form) }}
+    </div>
+{% endblock %}

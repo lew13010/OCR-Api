@@ -1,0 +1,27 @@
+api_advert_homepage:
+    path: /
+    defaults: { _controller: ApiAdvertBundle:Default:index }
+
+api_advert_category:
+    resource: "@ApiAdvertBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+
+api_advert_advert:
+    resource: "@ApiAdvertBundle/Resources/config/routing/advert.yml"
+    prefix:   /advert
+
+api_advert_city:
+    resource: "@ApiAdvertBundle/Resources/config/routing/city.yml"
+    prefix:   /city
+
+advert_category:
+    path:     /list-advert-category/{category}
+    defaults: { _controller: "ApiAdvertBundle:Advert:advertCategory" }
+
+advert_city:
+    path:     /list-advert-city/{city}
+    defaults: { _controller: "ApiAdvertBundle:Advert:advertCity" }
+
+advert_city_category:
+    path:     /list-advert/{city}/{category}
+    defaults: { _controller: "ApiAdvertBundle:Advert:advertCityCategory" }

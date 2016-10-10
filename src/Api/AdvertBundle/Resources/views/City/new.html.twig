@@ -1,0 +1,16 @@
+{% extends 'ApiAdvertBundle:Default:index.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block container %}
+    <h1>Ajouter une ville</h1>
+    <hr>
+    {{ form_start(form) }}
+
+        {{ form_errors(form.name) }}
+        {{ form_label(form.name, 'Nom de la Ville') }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+    <hr>
+        {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success pull-right'}} ) }}
+    <a class="btn btn-default pull-right" href="{{ path('city_index') }}" type="button">Retour à la liste</a>
+    {{ form_end(form) }}
+{% endblock %}

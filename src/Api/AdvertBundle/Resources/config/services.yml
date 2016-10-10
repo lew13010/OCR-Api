@@ -1,0 +1,9 @@
+services:
+#    api_advert.example:
+#        class: Api\AdvertBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+
+    services.google_api:
+        class: Api\AdvertBundle\Services\GoogleApi
+        arguments:
+            - '%key_google_api%'

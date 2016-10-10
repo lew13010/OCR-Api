@@ -1,0 +1,24 @@
+advert_index:
+    path:     /
+    defaults: { _controller: "ApiAdvertBundle:Advert:index" }
+    methods:  GET
+
+advert_show:
+    path:     /{slug}/show
+    defaults: { _controller: "ApiAdvertBundle:Advert:show" }
+    methods:  GET
+
+advert_new:
+    path:     /new
+    defaults: { _controller: "ApiAdvertBundle:Advert:new" }
+    methods:  [GET, POST]
+
+advert_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ApiAdvertBundle:Advert:edit" }
+    methods:  [GET, POST]
+
+advert_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ApiAdvertBundle:Advert:delete" }
+    methods:  [DELETE]

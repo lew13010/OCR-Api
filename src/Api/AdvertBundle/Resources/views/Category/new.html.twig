@@ -1,0 +1,16 @@
+{% extends 'ApiAdvertBundle:Default:index.html.twig' %}
+
+{% block container %}
+    <h1>Creation d'une catégorie</h1>
+    <hr>
+    {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+        <div class="form-group">
+            {{ form_label(form.name, 'Nom de la categorie') }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}} ) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+    <hr>
+    <a class="btn btn-default pull-right" href="{{ path('category_index') }}">Retour à la liste</a>
+{% endblock %}

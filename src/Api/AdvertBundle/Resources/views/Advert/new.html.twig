@@ -1,0 +1,112 @@
+{% extends 'ApiAdvertBundle:Default:index.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+
+{% block container %}
+    <h1>Creation d'un Article</h1>
+    <hr>
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        {{ form_label(form.title, 'Titre de l\'article') }}
+        {{ form_widget(form.title) }}
+
+        {{ form_label(form.description, 'Description de l\'article') }}
+        {{ form_widget(form.description) }}
+
+        {{ form_label(form.price, 'Prix de l\'article') }}
+            <div class="input-group">
+                <div class="input-group-addon">€</div>
+                {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+        {{ form_label(form.categories, 'Catégories de l\'article') }}
+        {{ form_widget(form.categories, {'label': 'Categorie de l\'article'}) }}
+
+        {{ form_label(form.city, 'Ville de l\'article') }}
+        {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+    <br>
+
+        <a href="#" id="add_images" class="btn btn-default pull-right">Ajouter une Image</a>
+        {{ form_widget(form.images) }}
+
+    <hr>
+        {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success pull-right'}} ) }}
+        <a class="btn btn-default pull-right" href="{{ path('advert_index') }}" type="button">Retour à la liste</a>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+            var $container = $('div#advert_images');
+
+            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+            var index = $container.find(':input').length;
+
+            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+            $('#add_images').click(function(e) {
+                if(index < 3){
+                    addImages($container);
+
+                    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                    return false;
+                }
+                else {
+                    return false;
+                }});
+
+            // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+            if (index == 0) {
+                addImages($container);
+            } else {
+                // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
+                $container.children('div').each(function () {
+                    addDeleteLink($(this));
+                });
+            }
+
+            // La fonction qui ajoute un formulaire CategoryType
+            function addImages($container) {
+                // Dans le contenu de l'attribut « data-prototype », on remplace :
+                // - le texte "__name__label__" qu'il contient par le label du champ
+                // - le texte "__name__" qu'il contient par le numéro du champ
+                var template = $container.attr('data-prototype')
+                                .replace(/__name__label__/g, 'Image n°' + (index+1))
+                                .replace(/__name__/g,        index)
+                        ;
+
+                // On crée un objet jquery qui contient ce template
+                var $prototype = $(template);
+
+                // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+                addDeleteLink($prototype);
+
+                // On ajoute le prototype modifié à la fin de la balise <div>
+                $container.append($prototype);
+
+                // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                index++;
+            }
+
+            // La fonction qui ajoute un lien de suppression d'une catégorie
+            function addDeleteLink($prototype) {
+                // Création du lien
+                var $deleteLink = $('<a href="#" class="btn btn-danger pull-right">Supprimer</a>');
+
+                // Ajout du lien
+                $prototype.append($deleteLink);
+
+                // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
+                $deleteLink.click(function(e) {
+                    $prototype.remove();
+                    index--;
+
+                    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                    return false;
+                });
+            }
+        });
+    </script>
+{% endblock %}

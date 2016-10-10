@@ -1,0 +1,67 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="Stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/base/jquery-ui.css" />
+    <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron">
+                <h1>Api Annonces</h1>
+            </div>
+            <a class="btn btn-default" href="{{ path('api_advert_homepage') }}">Accueil</a>
+            <a class="btn btn-default" href="{{ path('category_index') }}">Categories</a>
+            <a class="btn btn-default" href="{{ path('city_index') }}">Villes</a>
+            <a class="btn btn-default" href="{{ path('advert_index') }}">Annonces</a>
+            {% block container %}
+                {% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h2>5 dernieres Annonces</h2>
+                        <ul>
+                            {% for advert in adverts %}
+                                <li><a href="{{ path('advert_show', {'slug': advert.slug}) }}">{{ advert.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h2>Tri par categories</h2>
+                        <ul>
+                            {% for category in categories %}
+                                <li><a href="{{ path('advert_category', {'category': category.id}) }}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h2>Tri par villes</h2>
+                        <ul>
+                            {% for city in cities %}
+                                <li><a href="{{ path('advert_city', {'city': city.id}) }}">{{ city.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h2>Recherche par ville et par categorie</h2>
+                        {{ form_start(form) }}
+                            {{ form_label(form.category, 'Categorie') }}
+                            {{ form_widget(form.category) }}
+                        <br>
+                            {{ form_label(form.city, 'Ville') }}
+                            {{ form_widget(form.city) }}
+                        <br>
+                            {{ form_row(form.chercher, {'attr': {'class': 'pull-right btn btn-info'}}) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

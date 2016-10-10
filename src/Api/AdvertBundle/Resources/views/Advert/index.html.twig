@@ -1,0 +1,42 @@
+{% extends 'ApiAdvertBundle:Default:index.html.twig' %}
+
+{% block container %}
+    <h1>Liste des Annonces</h1>
+    <hr>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Ville</th>
+                <th>Categorie</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for advert in adverts %}
+            <tr>
+                <td><a href="{{ path('advert_show', { 'slug': advert.slug }) }}">{{ advert.id }}</a></td>
+                <td>{{ advert.title }}</td>
+                <td>{{ advert.city.name }}</td>
+                <td>{{ advert.categories.name }}</td>
+                <td>{% if null == advert.price %}
+                        NC
+                    {% else %}
+                        {{ advert.price }} €
+                    {% endif %}</td>
+                <td>
+                    <a class="btn btn-default" href="{{ path('advert_show', { 'slug': advert.slug }) }}">Voir</a>
+                    <a class="btn btn-info" href="{{ path('advert_edit', { 'id': advert.id }) }}">Editer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <div class="pull-right">
+        <a class="btn btn-default" href="{{ path('api_advert_homepage') }}" type="button">Retour Accueil</a>
+        <a class="btn btn-success" href="{{ path('advert_new') }}" type="button">Ajouter un article</a>
+    </div>
+{% endblock %}
