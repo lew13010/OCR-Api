@@ -9,6 +9,7 @@
 
 # Cache, session files and logs (Symfony3)
 /var/cache/*
+/bin
 /var/logs/*
 /var/sessions/*
 !var/cache/.gitkeep
