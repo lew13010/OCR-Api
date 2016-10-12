@@ -1,0 +1,46 @@
+api_advert_index:
+    path:     /
+    defaults: { _controller: "ApiAdvertBundle:Api:index" }
+    methods:  GET
+
+api_advert_show:
+    path:     /get/advert/{advert}
+    defaults: { _controller: "ApiAdvertBundle:Api:show" }
+    methods:  GET
+
+api_advert_add:
+    path:     /add/advert/
+    defaults: { _controller: "ApiAdvertBundle:Api:new" }
+    methods:  [GET, POST]
+
+api_advert_edit:
+    path:     /edit/advert/{id}
+    defaults: { _controller: "ApiAdvertBundle:Api:edit" }
+    methods:  [GET, POST]
+
+api_advert_delete:
+    path:     /delete/advert/{id]
+    defaults: { _controller: "ApiAdvertBundle:Api:delete" }
+    methods:  [DELETE]
+
+api_category_add:
+    path:     /add/category
+    defaults: { _controller: "ApiAdvertBundle:Api:newCat" }
+    methods:  [GET, POST]
+
+api_city_add:
+    path:     /add/city
+    defaults: { _controller: "ApiAdvertBundle:Api:newCity" }
+    methods:  [GET, POST]
+
+api_category:
+    path:     /get/adverts/category/{category}
+    defaults: { _controller: "ApiAdvertBundle:Api:advertCategory" }
+
+api_city:
+    path:     /get/adverts/city/{city}
+    defaults: { _controller: "ApiAdvertBundle:Api:AdvertCity" }
+
+api_city_category:
+    path:     /get/adverts/category/{category}/city/{city}
+    defaults: { _controller: "ApiAdvertBundle:Api:advertCityCategory" }

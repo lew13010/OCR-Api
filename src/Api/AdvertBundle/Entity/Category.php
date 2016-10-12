@@ -93,4 +93,9 @@ class Category
     {
         return $this->slugCat;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
