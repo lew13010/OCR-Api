@@ -3,25 +3,25 @@
 
 
 {% block container %}
-    <h1>Creation d'un Article</h1>
+    <h1>Creation d'une Annonce</h1>
     <hr>
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-        {{ form_label(form.title, 'Titre de l\'article') }}
+        {{ form_label(form.title, 'Titre de l\'annonce') }}
         {{ form_widget(form.title) }}
 
-        {{ form_label(form.description, 'Description de l\'article') }}
+        {{ form_label(form.description, 'Description de l\'annonce') }}
         {{ form_widget(form.description) }}
 
-        {{ form_label(form.price, 'Prix de l\'article') }}
+        {{ form_label(form.price, 'Prix de l\'annonce') }}
             <div class="input-group">
                 <div class="input-group-addon">€</div>
                 {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
             </div>
 
-        {{ form_label(form.categories, 'Catégories de l\'article') }}
+        {{ form_label(form.categories, 'Catégories de l\'annonce') }}
         {{ form_widget(form.categories, {'label': 'Categorie de l\'article'}) }}
 
-        {{ form_label(form.city, 'Ville de l\'article') }}
+        {{ form_label(form.city, 'Lieu de l\'annonce') }}
         {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
     <br>
 

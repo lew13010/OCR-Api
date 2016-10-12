@@ -6,8 +6,7 @@
     <table class="table table-hover table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
+                <th>Titre</th>
                 <th>Ville</th>
                 <th>Categorie</th>
                 <th>Prix</th>
@@ -17,7 +16,6 @@
         <tbody>
         {% for advert in adverts %}
             <tr>
-                <td><a href="{{ path('advert_show', { 'slug': advert.slug }) }}">{{ advert.id }}</a></td>
                 <td>{{ advert.title }}</td>
                 <td>{{ advert.city.name }}</td>
                 <td>{{ advert.categories.name }}</td>
@@ -37,6 +35,6 @@
     <hr>
     <div class="pull-right">
         <a class="btn btn-default" href="{{ path('api_advert_homepage') }}" type="button">Retour Accueil</a>
-        <a class="btn btn-success" href="{{ path('advert_new') }}" type="button">Ajouter un article</a>
+        <a class="btn btn-success" href="{{ path('advert_new') }}" type="button">Ajouter une Annonce</a>
     </div>
 {% endblock %}

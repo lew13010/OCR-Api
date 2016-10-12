@@ -2,6 +2,8 @@
 
 namespace Api\AdvertBundle\Repository;
 
+use Api\AdvertBundle\Entity\Category;
+
 /**
  * AdvertRepository
  *
@@ -39,7 +41,7 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
         $qb
             ->innerJoin('a.categories', 'cat')
             ->addSelect('cat')
-            ->where('cat.id = :category')
+            ->where('cat.slugCat = :category')
             ->andWhere('a.date > :date')
             ->setParameters(array('date' => $date, 'category' => $category))
             ->orderBy('a.date', 'DESC');
@@ -61,7 +63,7 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
         $qb
             ->innerJoin('a.city', 'city')
             ->addSelect('city')
-            ->where('city.id = :city')
+            ->where('city.name = :city')
             ->andWhere('a.date > :date')
             ->setParameters(array('date' => $date, 'city' => $city))
             ->orderBy('a.date', 'DESC');
@@ -85,8 +87,8 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
             ->addSelect('city')
             ->innerJoin('a.categories', 'cat')
             ->addSelect('cat')
-            ->where('city.id = :city')
-            ->andWhere('cat.id = :category')
+            ->where('city.name = :city')
+            ->andWhere('cat.slugCat = :category')
             ->andWhere('a.date > :date')
             ->setParameters(array('date' => $date, 'city' => $city, 'category' => $category))
             ->orderBy('a.date', 'DESC');

@@ -1,16 +1,16 @@
 {% extends 'ApiAdvertBundle:Default:index.html.twig' %}
 
 {% block container %}
-    <h1>Article</h1>
+    <h1>Annonces</h1>
     <hr>
     <table class="table table-hover table-bordered">
         <tbody>
             <tr>
-                <th class="col-sm-2">Title</th>
+                <th class="col-sm-2">Titre</th>
                 <td>{{ advert.title }}</td>
             </tr>
             <tr>
-                <th>Price</th>
+                <th>Prix</th>
                 <td>{% if null == advert.price %}NC{% else %}{{ advert.price }} €{% endif %}</td>
             </tr>
             <tr>

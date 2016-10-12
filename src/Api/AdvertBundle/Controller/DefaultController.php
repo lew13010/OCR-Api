@@ -20,10 +20,12 @@ class DefaultController extends Controller
             ->add('category', EntityType::class, array(
                 'class'         => 'Api\AdvertBundle\Entity\Category',
                 'choice_label'  => 'name',
+                'choice_value'  => 'slugCat',
             ))
             ->add('city', EntityType::class, array(
                 'class'         => 'Api\AdvertBundle\Entity\City',
                 'choice_label'  => 'name',
+                'choice_value'  => 'name',
             ))
             ->add('chercher', SubmitType::class)
             ->getForm();

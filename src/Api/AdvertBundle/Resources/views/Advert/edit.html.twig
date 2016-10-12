@@ -6,22 +6,22 @@
     <h1>Editer un Article</h1>
     <hr>
     {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
-    {{ form_label(edit_form.title, 'Titre de l\'article') }}
+    {{ form_label(edit_form.title, 'Titre de l\'annonce') }}
     {{ form_widget(edit_form.title) }}
 
-    {{ form_label(edit_form.description, 'Description de l\'article') }}
+    {{ form_label(edit_form.description, 'Description de l\'annonce') }}
     {{ form_widget(edit_form.description) }}
 
-    {{ form_label(edit_form.price, 'Prix de l\'article') }}
+    {{ form_label(edit_form.price, 'Prix de l\'annonce') }}
     <div class="input-group">
         <div class="input-group-addon">€</div>
         {{ form_widget(edit_form.price, {'attr': {'class': 'form-control'}}) }}
     </div>
 
-    {{ form_label(edit_form.categories, 'Catégories de l\'article') }}
-    {{ form_widget(edit_form.categories, {'label': 'Categorie de l\'article'}) }}
+    {{ form_label(edit_form.categories, 'Catégories de l\'annonce') }}
+    {{ form_widget(edit_form.categories, {'label': 'Categorie de l\'annonce'}) }}
 
-    {{ form_label(edit_form.city, 'Ville de l\'article') }}
+    {{ form_label(edit_form.city, 'Lieu de l\'annonce') }}
     {{ form_widget(edit_form.city, {'attr': {'class': 'form-control'}}) }}
 
     <br>

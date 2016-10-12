@@ -29,7 +29,7 @@ class AdvertController extends Controller
         ));
     }
 
-    public function advertCategoryAction(Request $request, Category $category)
+    public function advertCategoryAction(Request $request, $category)
     {
         $em = $this->getDoctrine()->getManager();
         $adverts = $em->getRepository('ApiAdvertBundle:Advert')->findAdvertCategory($category);
@@ -39,7 +39,7 @@ class AdvertController extends Controller
         ));
     }
 
-    public function advertCityAction(Request $request, City $city)
+    public function advertCityAction(Request $request, $city)
     {
         $em = $this->getDoctrine()->getManager();
         $adverts = $em->getRepository('ApiAdvertBundle:Advert')->findAdvertCity($city);
@@ -49,7 +49,7 @@ class AdvertController extends Controller
         ));
     }
 
-    public function advertCityCategoryAction(Request $request, City $city, Category $category)
+    public function advertCityCategoryAction(Request $request, $city, $category)
     {
         $em = $this->getDoctrine()->getManager();
         $adverts = $em->getRepository('ApiAdvertBundle:Advert')->findAdvertCityCategory($city, $category);

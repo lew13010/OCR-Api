@@ -3,6 +3,7 @@
 namespace Api\AdvertBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Category
@@ -27,6 +28,12 @@ class Category
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(name="slugCat", type="string", length=255, unique=true)
+     */
+    private $slugCat;
 
 
     /**
@@ -61,5 +68,29 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set slugCat
+     *
+     * @param string $slugCat
+     *
+     * @return Category
+     */
+    public function setSlugCat($slugCat)
+    {
+        $this->slugCat = $slugCat;
+
+        return $this;
+    }
+
+    /**
+     * Get slugCat
+     *
+     * @return string
+     */
+    public function getSlugCat()
+    {
+        return $this->slugCat;
     }
 }

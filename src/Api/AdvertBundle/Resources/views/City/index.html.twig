@@ -6,7 +6,6 @@
     <table class="table table-hover table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Actions</th>
             </tr>
@@ -14,7 +13,6 @@
         <tbody>
         {% for city in cities %}
             <tr>
-                <td><a href="{{ path('city_show', { 'id': city.id }) }}">{{ city.id }}</a></td>
                 <td>{{ city.name }}</td>
                 <td>
                     <a class="btn btn-default" href="{{ path('city_show', { 'id': city.id }) }}">Voir</a>
