@@ -64,8 +64,11 @@ Download [master.zip](https://github.com/lew13010/OCR-Api/archive/master.zip), a
  $ php bin/console doctrine:schema:update --force
  ```
  
-## USE
+## USE (Bundle)
 
 * IMPORTANT
  
- Create in first one category and one city before your first advert. 
+ Create in first one category and one city before create your first advert. 
+ 
+## USE (Api)
+

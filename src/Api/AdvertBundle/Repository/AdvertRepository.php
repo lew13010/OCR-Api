@@ -12,7 +12,7 @@ use Api\AdvertBundle\Entity\Category;
  */
 class AdvertRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAdvert()
+    public function findAdverts()
     {
         $date = new \DateTime();
         $date->modify('-10 day');

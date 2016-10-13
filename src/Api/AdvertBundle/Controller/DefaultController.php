@@ -12,7 +12,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $adverts = $em->getRepository('ApiAdvertBundle:Advert')->findAdvert();
+        $adverts = $em->getRepository('ApiAdvertBundle:Advert')->findAdverts();
         $categories = $em->getRepository('ApiAdvertBundle:Category')->findAll();
         $cities = $em->getRepository('ApiAdvertBundle:City')->findAll();
 

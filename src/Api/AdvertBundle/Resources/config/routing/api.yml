@@ -4,7 +4,7 @@ api_advert_index:
     methods:  GET
 
 api_advert_show:
-    path:     /get/advert/{advert}
+    path:     /get/advert/{id}
     defaults: { _controller: "ApiAdvertBundle:Api:show" }
     methods:  GET
 
@@ -19,7 +19,7 @@ api_advert_edit:
     methods:  [GET, POST]
 
 api_advert_delete:
-    path:     /delete/advert/{id]
+    path:     /delete/advert/{id}
     defaults: { _controller: "ApiAdvertBundle:Api:delete" }
     methods:  [DELETE]
 
@@ -36,11 +36,14 @@ api_city_add:
 api_category:
     path:     /get/adverts/category/{category}
     defaults: { _controller: "ApiAdvertBundle:Api:advertCategory" }
+    methods:  [GET, POST]
 
 api_city:
     path:     /get/adverts/city/{city}
-    defaults: { _controller: "ApiAdvertBundle:Api:AdvertCity" }
+    defaults: { _controller: "ApiAdvertBundle:Api:advertCity" }
+    methods:  [GET, POST]
 
 api_city_category:
     path:     /get/adverts/category/{category}/city/{city}
     defaults: { _controller: "ApiAdvertBundle:Api:advertCityCategory" }
+    methods:  [GET, POST]

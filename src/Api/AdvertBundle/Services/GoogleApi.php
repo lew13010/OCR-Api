@@ -28,8 +28,14 @@ class GoogleApi
         $url = 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($name).'&key='.$this->key;
         $result = file_get_contents($url);
         $reponse = json_decode($result);
-        if($reponse->results[0]->address_components[3]->long_name == 'France'){
+
+        if($reponse->status != 'ZERO_RESULTS' && $reponse->results[0]->address_components[3]->long_name == 'France')
+        {
             return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

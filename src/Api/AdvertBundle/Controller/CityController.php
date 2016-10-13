@@ -46,7 +46,7 @@ class CityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $city->setName(ucfirst($_POST['city']['name']));
             $infoCity = $this->container->get('services.google_api')->verifCityFrance($city->getName());
             if ($infoCity) {
                 $em = $this->getDoctrine()->getManager();
