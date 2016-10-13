@@ -43,7 +43,7 @@ class ApiController extends Controller
                 'categorie'     =>  $advert->getCategories()->getName(),
                 'city'          =>  $advert->getCity()->getName(),
                 'price'         =>  $advert->getPrice(),
-                'descritpion'   =>  $advert->getDescription(),
+                'description'   =>  $advert->getDescription(),
                 'images'        =>  $images,
             ]);
         }
@@ -85,7 +85,7 @@ class ApiController extends Controller
                 'categorie'     =>  $advert->getCategories()->getName(),
                 'city'          =>  $advert->getCity()->getName(),
                 'price'         =>  $advert->getPrice(),
-                'descritpion'   =>  $advert->getDescription(),
+                'description'   =>  $advert->getDescription(),
                 'images'        =>  $images,
             ];
 
@@ -225,7 +225,7 @@ class ApiController extends Controller
         return new JsonResponse([
             'success'   =>  true,
             'code'      =>  200,
-            'message'   => 'Annonce modifié avec succès',
+            'message'   => 'Annonce modifiée avec succès',
             'id'        =>  $advert->getId(),
         ]);
 
@@ -371,7 +371,7 @@ class ApiController extends Controller
                 'categorie'     =>  $advert->getCategories()->getName(),
                 'city'          =>  $advert->getCity()->getName(),
                 'price'         =>  $advert->getPrice(),
-                'descritpion'   =>  $advert->getDescription(),
+                'description'   =>  $advert->getDescription(),
                 'images'        =>  $images,
             ]);
         }
@@ -423,7 +423,7 @@ class ApiController extends Controller
                 'categorie'     =>  $advert->getCategories()->getName(),
                 'city'          =>  $advert->getCity()->getName(),
                 'price'         =>  $advert->getPrice(),
-                'descritpion'   =>  $advert->getDescription(),
+                'description'   =>  $advert->getDescription(),
                 'images'        =>  $images,
             ]);
         }
@@ -477,7 +477,7 @@ class ApiController extends Controller
                 'categorie'     =>  $advert->getCategories()->getName(),
                 'city'          =>  $advert->getCity()->getName(),
                 'price'         =>  $advert->getPrice(),
-                'descritpion'   =>  $advert->getDescription(),
+                'description'   =>  $advert->getDescription(),
                 'images'        =>  $images,
             ]);
         }
