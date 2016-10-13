@@ -18,4 +18,5 @@ Download [master.zip](https://github.com/lew13010/OCR-Api/archive/master.zip), a
 
 ## DOCUMENTATION
 
-For documentation, see [Wiki](https://github.com/lew13010/OCR-Api.wiki.git)
+For documentation on the installation and use of the API,
+see [Wiki](https://github.com/lew13010/OCR-Api.wiki.git)

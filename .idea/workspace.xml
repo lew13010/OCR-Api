@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0577cff8-2157-4c4e-b99b-4cbd4d49f4e7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/AdvertBundle/Controller/ApiController.php" afterPath="$PROJECT_DIR$/src/Api/AdvertBundle/Controller/ApiController.php" />
     </list>
     <ignored path="OCR-Api.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,8 +47,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="340">
-                <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+              <first_editor relative-caret-position="357">
+                <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -698,12 +697,12 @@
       <workItem from="1475744787360" duration="19804000" />
       <workItem from="1475828730789" duration="233000" />
       <workItem from="1475832696347" duration="53709000" />
-      <workItem from="1476269426617" duration="20884000" />
+      <workItem from="1476269426617" duration="21052000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="157046000" />
+    <option name="totallyTimeSpent" value="157214000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1130,8 +1129,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="340">
-            <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+          <first_editor relative-caret-position="357">
+            <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
