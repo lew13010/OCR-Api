@@ -31,7 +31,7 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
             ;
     }
 
-    public function findAdvertCategory($category)
+    public function findAdvertCategory($category, $page = 1, $limit = 0)
     {
         $date = new \DateTime();
         $date->modify('-10 day');
@@ -44,7 +44,12 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
             ->where('cat.slugCat = :category')
             ->andWhere('a.date > :date')
             ->setParameters(array('date' => $date, 'category' => $category))
+            ->setFirstResult(($page-1)*$limit)
             ->orderBy('a.date', 'DESC');
+
+        if($limit > 0 ){
+            $qb = $qb->setMaxResults($limit);
+        }
 
 
         return $qb
@@ -53,7 +58,7 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
             ;
     }
 
-    public function findAdvertCity($city)
+    public function findAdvertCity($city, $page = 1, $limit = 0)
     {
         $date = new \DateTime();
         $date->modify('-10 day');
@@ -66,8 +71,12 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
             ->where('city.name = :city')
             ->andWhere('a.date > :date')
             ->setParameters(array('date' => $date, 'city' => $city))
+            ->setFirstResult(($page-1)*$limit)
             ->orderBy('a.date', 'DESC');
 
+        if($limit > 0 ){
+            $qb = $qb->setMaxResults($limit);
+        }
 
         return $qb
             ->getQuery()
@@ -75,7 +84,7 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
             ;
     }
 
-    public function findAdvertCityCategory($city, $category)
+    public function findAdvertCityCategory($city, $category, $page = 1, $limit = 0)
     {
         $date = new \DateTime();
         $date->modify('-10 day');
@@ -91,8 +100,12 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere('cat.slugCat = :category')
             ->andWhere('a.date > :date')
             ->setParameters(array('date' => $date, 'city' => $city, 'category' => $category))
+            ->setFirstResult(($page-1)*$limit)
             ->orderBy('a.date', 'DESC');
 
+        if($limit > 0 ){
+            $qb = $qb->setMaxResults($limit);
+        }
 
         return $qb
             ->getQuery()

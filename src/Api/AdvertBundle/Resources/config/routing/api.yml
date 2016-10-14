@@ -34,16 +34,16 @@ api_city_add:
     methods:  [GET, POST]
 
 api_category:
-    path:     /get/adverts/category/{category}
-    defaults: { _controller: "ApiAdvertBundle:Api:advertCategory" }
+    path:     /get/adverts/category/{category}/{page}
+    defaults: { _controller: "ApiAdvertBundle:Api:advertCategory", page: 1 }
     methods:  [GET, POST]
 
 api_city:
-    path:     /get/adverts/city/{city}
-    defaults: { _controller: "ApiAdvertBundle:Api:advertCity" }
+    path:     /get/adverts/city/{city}/{page}
+    defaults: { _controller: "ApiAdvertBundle:Api:advertCity", page: 1 }
     methods:  [GET, POST]
 
 api_city_category:
-    path:     /get/adverts/category/{category}/city/{city}
-    defaults: { _controller: "ApiAdvertBundle:Api:advertCityCategory" }
+    path:     /get/adverts/category/{category}/city/{city}/{page}
+    defaults: { _controller: "ApiAdvertBundle:Api:advertCityCategory", page: 1 }
     methods:  [GET, POST]

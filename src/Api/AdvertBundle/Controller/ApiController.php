@@ -333,15 +333,20 @@ class ApiController extends Controller
         ]);
     }
 
-    public function advertCategoryAction($category)
+    public function advertCategoryAction($category, $page)
     {
         $em = $this->getDoctrine()->getManager();
         $testInt = (int)$category;
         $error = 0;
         $message = [];
+        $array  = [];
+        $nbAdvertPerPage = 10;
 
         $adverts = $em->getRepository('ApiAdvertBundle:Advert')->findAdvertCategory($category);
+        $count = count($adverts);
+        $totalPage = ceil($count/$nbAdvertPerPage);
 
+        if($page <= 0 || $page > $totalPage){ $error++; array_push($message, "La page demandé n'existe pas");}
         if($testInt <> 0){ $error++; array_push($message, "Veuillez saisir le 'Slug' de la catagorie dans l'url");}
         if(empty($adverts)){ $error++; array_push($message, 'La categorie demandé est vide ou n\'existe pas dans la BDD');}
 
@@ -353,7 +358,8 @@ class ApiController extends Controller
             ]);
         }
 
-        $array  = [];
+        $adverts = $em->getRepository('ApiAdvertBundle:Advert')->findAdvertCategory($category, $page, $nbAdvertPerPage);
+
         foreach ($adverts as $advert) {
             unset($images);
             $images = [];
@@ -379,20 +385,26 @@ class ApiController extends Controller
         return new JsonResponse([
             'success'   =>  true,
             'code'      =>  200,
-            'message'   =>  'Les annonces de la categorie : '.$category,
+            'message'   =>  $count.' annonces trouvé dans la categorie : '.$category,
             'annonces'  =>  $array,
+            'page'      =>  $page .'/'.$totalPage,
         ]);
     }
 
-    public function advertCityAction($city)
+    public function advertCityAction($city, $page)
     {
         $em = $this->getDoctrine()->getManager();
         $testInt = (int)$city;
         $error = 0;
         $message = [];
+        $array  = [];
+        $nbAdvertPerPage = 10;
 
         $adverts = $em->getRepository('ApiAdvertBundle:Advert')->findAdvertCity($city);
+        $count = count($adverts);
+        $totalPage = ceil($count/$nbAdvertPerPage);
 
+        if($page <= 0 || $page > $totalPage){ $error++; array_push($message, "La page demandé n'existe pas");}
         if($testInt <> 0){ $error++; array_push($message, "Veuillez saisir le 'nom' de la catagorie dans l'url");}
         if(empty($adverts)){ $error++; array_push($message, 'La ville demandé est vide ou n\'existe pas dans la BDD');}
 
@@ -403,8 +415,8 @@ class ApiController extends Controller
                 'message'   =>  $message,
             ]);
         }
+        $adverts = $em->getRepository('ApiAdvertBundle:Advert')->findAdvertCity($city, $page, $nbAdvertPerPage);
 
-        $array  = [];
         foreach ($adverts as $advert) {
             unset($images);
             $images = [];
@@ -431,21 +443,27 @@ class ApiController extends Controller
         return new JsonResponse([
             'success'   =>  true,
             'code'      =>  200,
-            'message'   =>  'Les annonces de la ville : '.$city,
+            'message'   =>  $count.' annonces trouvé dans la ville : '.$city,
             'annonces'  =>  $array,
+            'page'      =>  $page .'/'.$totalPage,
         ]);
     }
 
-    public function advertCityCategoryAction($city, $category)
+    public function advertCityCategoryAction($city, $category, $page = 1)
     {
         $em = $this->getDoctrine()->getManager();
         $testIntCity = (int)$city;
         $testIntCategory = (int)$category;
         $error = 0;
         $message = [];
+        $array  = [];
+        $nbAdvertPerPage = 10;
 
         $adverts = $em->getRepository('ApiAdvertBundle:Advert')->findAdvertCityCategory($city, $category);
+        $count = count($adverts);
+        $totalPage = ceil($count/$nbAdvertPerPage);
 
+        if($page <= 0 || $page > $totalPage){ $error++; array_push($message, "La page demandé n'existe pas");}
         if($testIntCity <> 0){ $error++; array_push($message, "Veuillez saisir le 'nom' de la ville dans l'url");}
         if($testIntCategory <> 0){ $error++; array_push($message, "Veuillez saisir le 'nom' de la catagorie dans l'url");}
         if(empty($adverts)){ $error++; array_push($message, 'La "ville/categorie" demandé est vide ou n\'existe pas dans la BDD');}
@@ -458,7 +476,7 @@ class ApiController extends Controller
             ]);
         }
 
-        $array  = [];
+        $adverts = $em->getRepository('ApiAdvertBundle:Advert')->findAdvertCity($city, $page, $nbAdvertPerPage);
         foreach ($adverts as $advert) {
             unset($images);
             $images = [];
@@ -485,8 +503,9 @@ class ApiController extends Controller
         return new JsonResponse([
             'success'   =>  true,
             'code'      =>  200,
-            'message'   =>  'Les annonces de la ville : '.$city,
+            'message'   =>  $count.' annonces trouvé dans la ville : '.$city.' et dans la categorie: '.$category,
             'annonces'  =>  $array,
+            'page'      =>  $page .'/'.$totalPage,
         ]);
     }
 }
