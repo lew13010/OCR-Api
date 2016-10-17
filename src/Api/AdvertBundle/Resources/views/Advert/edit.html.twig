@@ -25,10 +25,6 @@
     {{ form_widget(edit_form.city, {'attr': {'class': 'form-control'}}) }}
 
     <br>
-    <p id="edit-nb-images" data-images="{{ advert.images|length }}">{{ advert.images|length }} image{% if advert.images|length != 1 %}s{% endif %} attachée{% if advert.images|length != 1 %}s{% endif %} à cette annonce.</p>
-    {% for image in advert.images %}
-        <p>{{ image.image }}</p>
-    {% endfor %}
 
     <a href="#" id="add_images" class="btn btn-default pull-right">Ajouter une Image</a>
     {{ form_widget(edit_form.images) }}

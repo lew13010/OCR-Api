@@ -9,9 +9,9 @@ api_advert_show:
     methods:  GET
 
 api_advert_add:
-    path:     /add/advert/
+    path:     /add/advert
     defaults: { _controller: "ApiAdvertBundle:Api:new" }
-    methods:  [GET, POST]
+    methods:  [GET, POST, PUT]
 
 api_advert_edit:
     path:     /edit/advert/{id}

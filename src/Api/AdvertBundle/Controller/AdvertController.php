@@ -73,9 +73,9 @@ class AdvertController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             foreach ($advert->getImages() as $image) {
+                $image->setDate();
                 $image->setAdvert($advert);
             }
-            //die(var_dump('lol'));
             $em->persist($advert);
             $em->flush();
 
@@ -112,11 +112,21 @@ class AdvertController extends Controller
         $editForm = $this->createForm('Api\AdvertBundle\Form\AdvertType', $advert);
         $editForm->handleRequest($request);
 
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             foreach ($advert->getImages() as $image) {
+                $image->setDate();
                 $image->setAdvert($advert);
+                }
+
+            if(empty($_FILES)) {
+                $images = $em->getRepository('ApiAdvertBundle:Image')->findBy(array('advert' => $advert));
+                foreach ($images as $image) {
+                    $em->remove($image);
+                }
             }
+            
             $em->persist($advert);
             $em->flush();
 

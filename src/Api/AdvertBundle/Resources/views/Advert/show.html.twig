@@ -26,7 +26,7 @@
                 <td>
                     <p>{{ advert.description }}</p>
                     {% for image in advert.images %}
-                        <p class="col-sm-4"><img src="../../../../../../uploads/{{ image.image }}" alt="" class="img-responsive img-rounded pull-left"></p>
+                        <p class="col-sm-4"><img src="{{ absolute_url(asset('/uploads/')) }}{{ image.image }}" alt="" class="img-responsive img-rounded pull-left"></p>
                     {% endfor %}
                 </td>
             </tr>

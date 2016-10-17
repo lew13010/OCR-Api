@@ -23,7 +23,7 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter(':date', $date)
             ->orderBy('a.date', 'DESC')
             ->setMaxResults(5);
-        5;
+        ;
 
         return $qb
             ->getQuery()

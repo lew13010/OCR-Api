@@ -5,6 +5,7 @@ namespace Api\AdvertBundle\Controller;
 use Api\AdvertBundle\Entity\Advert;
 use Api\AdvertBundle\Entity\Category;
 use Api\AdvertBundle\Entity\City;
+use Api\AdvertBundle\Entity\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -101,6 +102,7 @@ class ApiController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+
         $title = ucfirst($request->query->get('title'));
         $category = $request->query->get('category');
         $city = $request->query->get('city');
@@ -137,6 +139,38 @@ class ApiController extends Controller
 
         if(null == $description){ $error++; array_push($message, 'Veuillez saisir le parametre "description"');}
 
+        $advert = new Advert();
+        $advert->setTitle($title);
+        $advert->setCategories($category);
+        $advert->setCity($city);
+        $advert->setPrice($price);
+        $advert->setDescription($description);
+        $images = $request->files->all();
+        $errorImg = 0;
+
+        foreach ($images as $image) {
+            $errorImg++;
+            if(!$image->guessExtension() == ('jpg' || 'jpeg' || 'png')){
+                $error++;
+                array_push($message, 'Le format de fichier n°'.$errorImg.' n\'est pas accépté');
+            }
+
+            if($error > 0){
+                return new JsonResponse([
+                    'success'   =>  false,
+                    'code'      =>  412,
+                    'message'   =>  $message,
+                ]);
+            }
+
+            $img = new Image();
+            $img->setImage(uniqid() . '.' . $image->guessExtension());
+            $advert->addImage($img);
+            $image->move('../web/uploads/', $img->getImage());
+            $img->setAdvert($advert);
+            $em->persist($img);
+        }
+
         if($error > 0){
             return new JsonResponse([
                 'success'   =>  false,
@@ -145,15 +179,8 @@ class ApiController extends Controller
             ]);
         }
 
-        $advert = new Advert();
-        $advert->setTitle($title);
-        $advert->setCategories($category);
-        $advert->setCity($city);
-        $advert->setPrice($price);
-        $advert->setDescription($description);
-
         $em->persist($advert);
-        $em->flush($advert);
+        $em->flush();
 
         return new JsonResponse([
             'success'   =>  true,
@@ -171,8 +198,11 @@ class ApiController extends Controller
         $city = $request->query->get('city');
         $price = (int)$request->query->get('price');
         $description = $request->query->get('description');
+        $images = $request->files->all();
+
 
         $error = 0;
+        $errorImg = 0;
         $update = 0;
         $message = [];
 
@@ -188,27 +218,51 @@ class ApiController extends Controller
 
         if(!empty($title)){ $update++; $advert->setTitle($title); }
         if(!empty($category)) {
-            $verif = $em->getRepository('ApiAdvertBundle:Category')->findOneBy(array('slug' => $category));
+            $verif = $em->getRepository('ApiAdvertBundle:Category')->findOneBy(array('slugCat' => $category));
             if (empty($verif)) {
                 $error++;
                 array_push($message, "La categorie '$category' n'existe pas pas dans la BDD");
             } else {
                 $update++;
-                $advert->setCategories($verif->getId());
+                $advert->setCategories($verif);
             }
         }
+
         if(!empty($city)) {
-            $verif = $em->getRepository('ApiAdvertBundle:City')->findOneBy(array('slug' => $city));
+            $verif = $em->getRepository('ApiAdvertBundle:City')->findOneBy(array('name' => $city));
             if (empty($verif)) {
                 $error++;
                 array_push($message, "La ville '$city' n'existe pas pas dans la BDD");
             } else {
                 $update++;
-                $advert->setCity($verif->getId());
+                $advert->setCity($verif);
             }
         }
         if(!empty($price)){ $update++; $advert->setPrice($price); }
         if(!empty($description)){ $update++; $advert->setDescription($description); }
+
+        if(!empty($images)) {
+            $update++;
+
+            $img = $em->getRepository('ApiAdvertBundle:Image')->findOneBy(array('advert' => $id));
+            foreach ($images as $image) {
+                $errorImg++;
+                if (!$image->guessExtension() == ('jpg' || 'jpeg' || 'png')) {
+                    $error++;
+                    array_push($message, 'Le format de fichier n°' . $errorImg . ' n\'est pas accépté');
+                }
+
+                if ($error > 0) {
+                    return new JsonResponse([
+                        'success' => false,
+                        'code' => 412,
+                        'message' => $message,
+                    ]);
+                }
+                $image->move('../web/uploads/', $img->getImage());
+                $em->persist($img);
+            }
+        }
         if($update == 0){ $error++; array_push($message, "Veuillez saisir au moins un parametre de modification");}
 
         if($error > 0){
@@ -220,7 +274,7 @@ class ApiController extends Controller
         }
 
         $em->persist($advert);
-        $em->flush($advert);
+        $em->flush();
 
         return new JsonResponse([
             'success'   =>  true,

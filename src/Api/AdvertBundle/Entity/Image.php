@@ -39,6 +39,33 @@ class Image
     private $file;
 
     /**
+     * @var \DateTime
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate()
+    {
+        $this->date = new \DateTime();
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -108,14 +135,29 @@ class Image
 
     /**
      * @ORM\PrePersist()
-     * @ORM\PreUpdate()
      */
     public function preUpload()
     {
+
         if(is_null($this->file))
+        {
             return;
+        }
         $this->image = uniqid().'.'.$this->file->guessExtension();
     }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        if(is_null($this->file))
+        {
+            return;
+        }
+        unlink('../web/uploads/'.$this->image);
+    }
+
     /**
      * @ORM\PostPersist()
      * @ORM\PostUpdate
@@ -123,7 +165,9 @@ class Image
     public function upload()
     {
         if(is_null($this->file))
+        {
             return;
+        }
         $this->file->move('../web/uploads/', $this->image);
     }
 
@@ -133,7 +177,9 @@ class Image
     public function deleteFile()
     {
         if(is_null($this->image))
+        {
             return;
+        }
         unlink('../web/uploads/'.$this->image);
     }
 }
